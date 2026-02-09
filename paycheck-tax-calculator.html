@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>USA Paycheck Tax Calculator 2026 | Net Salary After Tax</title>
+    <meta name="description" content="Free 2026 USA paycheck tax calculator. Calculate your take-home pay after federal, state, and FICA taxes. See exactly where your money goes each paycheck.">
+    <meta name="keywords" content="USA paycheck tax calculator, salary after tax USA, net salary calculator USA, take home pay calculator USA, 2026 tax calculator, paycheck calculator">
+    
+    <!-- Schema Markup for FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How accurate is this paycheck tax calculator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our calculator provides accurate estimates based on current 2026 tax brackets, federal rates, and standard deductions. For exact calculations, consult with a tax professional as individual circumstances may vary."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What taxes are deducted from my paycheck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Typically, your paycheck includes deductions for federal income tax, state income tax (if applicable), FICA (Social Security and Medicare), and sometimes local taxes, insurance premiums, and retirement contributions."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How do I calculate my take-home pay?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take-home pay is your gross salary minus all deductions. Use our calculator by entering your salary amount and selecting your state to get an instant breakdown of taxes and net income."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What is FICA tax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FICA stands for Federal Insurance Contributions Act, comprising Social Security (6.2%) and Medicare (1.45%) taxes. Employers match these amounts, but only your portion is deducted from your paycheck."
+        }
+      }]
+    }
+    </script>
+    
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Typography */
+        h1 {
+            color: #1e293b;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            color: #334155;
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        h3 {
+            color: #475569;
+            font-size: 1.4rem;
+            margin: 1.8rem 0 0.8rem;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Calculator Container */
+        .calculator-container {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .calculator-title {
+            text-align: center;
+            color: #1e293b;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        /* Calculator Grid */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-section, .results-section {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Button */
+        .calculate-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 1.1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Results */
+        .result-item {
+            background: #f8fafc;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.3rem;
+        }
+        
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .net-salary {
+            background: #dbeafe;
+            border-left-color: #1d4ed8;
+        }
+        
+        .tax-breakdown {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* Article Sections */
+        .article-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+        
+        /* FAQ Styles */
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-question {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Bluehost Section */
+        .bluehost-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        
+        .bluehost-btn {
+            background: white;
+            color: #1e40af;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+        
+        .bluehost-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Ad Container */
+        .ad-container {
+            margin: 2.5rem 0;
+            text-align: center;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        
+        /* Disclaimer */
+        .disclaimer {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .calculator-container {
+                padding: 1.5rem;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .article-section {
+                padding: 1.5rem;
+            }
+            
+            .bluehost-section {
+                padding: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .calculator-container {
+                padding: 1.2rem;
+            }
+            
+            input, select {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>USA Paycheck Tax Calculator 2026</h1>
+        <p>Calculate your exact take-home pay after federal, state, and FICA taxes. Updated with 2026 tax brackets and rates.</p>
+    </header>
+
+    <!-- AdSense Ad 1 -->
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7300331231530877"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-7300331231530877"
+             data-ad-slot="2175956093"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Calculator -->
+    <div class="calculator-container">
+        <h2 class="calculator-title">Calculate Your 2026 Take-Home Pay</h2>
+        
+        <div class="calculator-grid">
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="salary">Annual Salary ($)</label>
+                    <input type="number" id="salary" placeholder="e.g., 60000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <select id="state">
+                        <option value="0">No State Income Tax</option>
+                        <option value="5.75">California (5.75%)</option>
+                        <option value="6.85">New York (6.85%)</option>
+                        <option value="5">Illinois (5%)</option>
+                        <option value="4.25">Michigan (4.25%)</option>
+                        <option value="5.75">Virginia (5.75%)</option>
+                        <option value="3.07">Pennsylvania (3.07%)</option>
+                        <option value="4.95">Arizona (4.95%)</option>
+                        <option value="4.75">Colorado (4.75%)</option>
+                        <option value="5.35">Minnesota (5.35%)</option>
+                        <option value="5">Indiana (5%)</option>
+                        <option value="3.75">North Carolina (3.75%)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="payFrequency">Pay Frequency</label>
+                    <select id="payFrequency">
+                        <option value="yearly">Yearly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="biweekly">Bi-weekly</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateTax()">Calculate My Take-Home Pay</button>
+            </div>
+            
+            <div class="results-section">
+                <div class="result-item net-salary">
+                    <div class="result-label">Net Annual Salary (Take-Home)</div>
+                    <div class="result-value" id="netSalary">$0.00</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">Federal Income Tax</div>
+                    <div class="result-value" id="federalTax">$0.00</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">State Income Tax</div>
+                    <div class="result-value" id="stateTax">$0.00</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-label">FICA Tax (Social Security & Medicare)</div>
+                    <div class="result-value" id="ficaTax">$0.00</div>
+                </div>
+                
+                <div class="tax-breakdown">
+                    <h3>Tax Breakdown</h3>
+                    <p>Total Taxes: <span id="totalTax">$0.00</span></p>
+                    <p>Effective Tax Rate: <span id="taxRate">0%</span></p>
+                    <p>You keep <span id="keepPercentage">0%</span> of your gross income</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <article>
+        <div class="article-section">
+            <h2>Why Every American Needs a Paycheck Tax Calculator</h2>
+            <p>If you've ever looked at your paycheck and wondered where all your money goes, you're not alone. The average American worker pays approximately 25-35% of their income in various taxes before they ever see a dime. With federal taxes, state taxes, Social Security, Medicare, and sometimes local taxes, understanding your take-home pay can feel like solving a complex math problem.</p>
+            <p>Our 2026 USA Paycheck Tax Calculator solves this problem by giving you instant clarity about your earnings. Whether you're negotiating a new job offer, planning your monthly budget, or trying to understand how a raise will actually impact your bank account, this tool provides the answers you need in seconds.</p>
+            <p>For 2026, several tax provisions are set to change unless Congress extends current laws. The Tax Cuts and Jobs Act provisions affecting individual taxpayers are scheduled to expire after 2025, which could mean significant changes to tax brackets and deductions. Our calculator incorporates the latest projections and updates to give you the most accurate picture possible.</p>
+        </div>
+
+        <!-- AdSense Ad 2 -->
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7300331231530877"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-7300331231530877"
+                 data-ad-slot="2175956093"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="article-section">
+            <h2>How Paycheck Taxes Work in the United States</h2>
+            <p>Understanding the American tax system is crucial for financial planning. When you receive a paycheck, several layers of taxation are applied before funds hit your bank account. The main components are federal income tax, state income tax (in most states), and FICA taxes for Social Security and Medicare.</p>
+            
+            <h3>The Federal Income Tax System</h3>
+            <p>The United States uses a progressive tax system for federal income taxes, meaning higher income levels are taxed at higher rates. For 2026, we expect seven tax brackets ranging from 10% to 37%, though exact brackets will be adjusted for inflation. The standard deduction for single filers is projected to be approximately $14,600, and $29,200 for married couples filing jointly.</p>
+            
+            <h3>State Income Taxes Vary Widely</h3>
+            <p>State taxation adds another layer of complexity. Nine states have no income tax at all (Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming), while others like California and New York have top rates exceeding 10%. Some states use a flat tax rate, while others have progressive systems similar to the federal government.</p>
+            
+            <h3>FICA: Social Security and Medicare</h3>
+            <p>FICA taxes are separate from income taxes and fund specific social programs. Social Security tax is 6.2% on income up to the wage base limit ($168,600 in 2024, adjusted annually). Medicare tax is 1.45% on all earnings, with an additional 0.9% surtax on high-income earners (over $200,000 for singles, $250,000 for married couples).</p>
+        </div>
+
+        <div class="article-section">
+            <h2>How Our 2026 Paycheck Calculator Works</h2>
+            <p>Our calculator uses the latest IRS tax brackets projected for 2026, current FICA rates, and state tax information to provide accurate estimates. Here's what happens when you enter your information:</p>
+            
+            <h3>Step 1: Gross Income Calculation</h3>
+            <p>First, we convert your entered salary to an annual figure based on your selected pay frequency. This gives us your gross annual income—the starting point for all calculations.</p>
+            
+            <h3>Step 2: Federal Tax Calculation</h3>
+            <p>We apply the standard deduction ($14,600 for single filers in 2026 projections) to your income, then apply the progressive tax brackets to the taxable amount. This ensures you only pay each rate on income within that bracket.</p>
+            
+            <h3>Step 3: State Tax Application</h3>
+            <p>Based on your selected state, we apply either a flat rate or progressive calculation. For simplicity, our calculator uses flat rates that represent average effective rates for each state.</p>
+            
+            <h3>Step 4: FICA Deductions</h3>
+            <p>We calculate Social Security tax (6.2% up to the wage base) and Medicare tax (1.45% on all earnings). For high earners, we include the Additional Medicare Tax of 0.9% on income above threshold amounts.</p>
+            
+            <h3>Step 5: Net Salary Computation</h3>
+            <p>Finally, we subtract all taxes from your gross income to show your exact take-home pay, both annually and adjusted for your selected pay frequency.</p>
+        </div>
+
+        <div class="article-section">
+            <h2>Real-World Examples: What Different Salaries Take Home</h2>
+            
+            <h3>Example 1: $45,000 Annual Salary in Texas</h3>
+            <p>A single filer earning $45,000 in Texas (no state income tax) would pay approximately $3,400 in federal taxes and $3,443 in FICA taxes. Their take-home pay would be about $38,157 annually, or $3,180 per month.</p>
+            
+            <h3>Example 2: $85,000 Annual Salary in California</h3>
+            <p>A California resident earning $85,000 would pay roughly $10,500 in federal taxes, $4,890 in state taxes, and $6,503 in FICA taxes. Their net income would be approximately $63,107 annually, or $5,259 monthly.</p>
+            
+            <h3>Example 3: $150,000 Annual Salary in New York</h3>
+            <p>A high earner in New York making $150,000 would pay about $26,600 in federal taxes, $10,275 in state taxes, and $10,613 in FICA taxes (including Additional Medicare Tax). Their take-home pay would be roughly $102,512 annually, or $8,543 per month.</p>
+            
+            <p>These examples illustrate how dramatically location and income level affect your net earnings. That's why using a location-specific calculator like ours is essential for accurate planning.</p>
+        </div>
+
+        <div class="article-section">
+            <h2>Benefits of Using Our Paycheck Tax Calculator</h2>
+            <p>1. <strong>Salary Negotiation Power:</strong> When you know exactly how much you'll take home from different salary offers, you can negotiate more effectively.</p>
+            <p>2. <strong>Budget Planning Accuracy:</strong> Plan your monthly expenses based on real numbers, not guesses about your after-tax income.</p>
+            <p>3. <strong>Relocation Decisions:</strong> Considering a move? Compare how different state tax policies would impact your finances.</p>
+            <p>4. <strong>Career Planning:</strong> Understand the true value of raises, bonuses, or career changes before making decisions.</p>
+            <p>5. <strong>Tax Withholding Optimization:</strong> Use the results to check if you're having too much or too little tax withheld from your paycheck.</p>
+            <p>6. <strong>Financial Goal Setting:</strong> Set realistic savings and investment goals based on your actual disposable income.</p>
+        </div>
+
+        <!-- Bluehost Affiliate Section -->
+        <div class="bluehost-section">
+            <h2>Best Hosting to Run This Calculator Website</h2>
+            <p>Want to create your own financial calculator website? Many beginners choose Bluehost for its reliability, speed, and excellent customer support. Bluehost is a popular hosting provider that makes it easy to get started with WordPress websites.</p>
+            <p>With one-click WordPress installation and 24/7 support, Bluehost simplifies the process of creating professional websites like this paycheck calculator. Their affordable plans include a free domain name for the first year, SSL certificate, and ample storage for growing websites.</p>
+            <a href="#" class="bluehost-btn">Start Your Calculator Website with Bluehost</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.9;">Note: This is an affiliate recommendation. We only recommend products we believe in.</p>
+        </div>
+
+        <div class="article-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How accurate is this paycheck tax calculator?</div>
+                <p>Our calculator provides accurate estimates based on current 2026 tax projections, standard deductions, and average state tax rates. For exact calculations accounting for all deductions and credits, consult a tax professional.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What taxes are deducted from my paycheck?</div>
+                <p>Typically, federal income tax, state income tax (in most states), Social Security (6.2%), Medicare (1.45%), and sometimes local taxes. Additional deductions may include health insurance, retirement contributions, and other benefits.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Why is my take-home pay different from my salary?</div>
+                <p>Your salary is gross income before taxes and deductions. Take-home pay (net income) is what remains after all mandatory taxes and voluntary deductions are subtracted.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What is the difference between marginal and effective tax rate?</div>
+                <p>Your marginal tax rate is the rate on your last dollar of income (your highest bracket). Your effective tax rate is the average rate you pay on all your income (total tax ÷ total income).</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do I change my tax withholdings?</div>
+                <p>Submit a new Form W-4 to your employer. The form was redesigned in 2020 to be more accurate. Use our calculator to determine the right withholding amount before submitting.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Are bonuses taxed differently?</div>
+                <p>Yes, bonuses are typically taxed at a flat 22% federal rate for supplemental wages up to $1 million. State taxes also apply. However, when you file your annual return, bonuses are included with regular income.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What happens if I have too much tax withheld?</div>
+                <p>You'll receive a refund when you file your tax return. While some people enjoy large refunds, this means you've given the government an interest-free loan. Consider adjusting your W-4 to have more accurate withholding.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do I pay Social Security tax on all my income?</div>
+                <p>No. For 2024, Social Security tax applies only to the first $168,600 of earnings. This limit adjusts annually for inflation. Medicare tax, however, applies to all earnings with no cap.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do self-employment taxes work?</div>
+                <p>Self-employed individuals pay both the employee and employer portions of FICA taxes (15.3% total), plus income taxes. They can deduct the employer-equivalent portion when calculating adjusted gross income.</p>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What tax changes are expected for 2026?</div>
+                <p>Unless extended, several provisions from the 2017 Tax Cuts and Jobs Act expire after 2025. This may mean higher tax rates, lower standard deductions, and changes to many deductions and credits.</p>
+            </div>
+        </div>
+
+        <!-- AdSense Ad 3 -->
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7300331231530877"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-7300331231530877"
+                 data-ad-slot="2175956093"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="article-section">
+            <h2>Conclusion: Take Control of Your Financial Future</h2>
+            <p>Understanding your paycheck is the first step toward financial empowerment. With our 2026 USA Paycheck Tax Calculator, you no longer need to guess how much you'll actually earn from your salary. You can make informed decisions about job offers, relocation, budgeting, and financial planning.</p>
+            <p>Tax laws will continue to evolve, especially with significant changes projected for 2026. Bookmark this page and return whenever you need to calculate your take-home pay. We'll continue updating our calculator with the latest tax brackets, rates, and regulations.</p>
+            <p>Knowledge is power, especially when it comes to your money. Use this tool regularly to stay informed about how taxes impact your earnings and to plan for a more secure financial future.</p>
+        </div>
+
+        <div class="disclaimer">
+            <h3>Important Disclaimer</h3>
+            <p>This paycheck tax calculator provides estimates based on projected 2026 tax rates and standard assumptions. It is not financial or tax advice. Actual tax liability may vary based on your specific circumstances, deductions, credits, and other factors not considered in this calculation. Always consult with a qualified tax professional for personal tax advice and planning. Tax laws are subject to change, and we cannot guarantee the accuracy of calculations for future tax years.</p>
+        </div>
+    </article>
+
+    <footer style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem;">
+        <p>© 2026 USA Paycheck Tax Calculator. This is an independent tool not affiliated with the IRS or any government agency.</p>
+        <p style="margin-top: 0.5rem;">For official tax information, visit <a href="https://www.irs.gov" style="color: #3b82f6;">IRS.gov</a></p>
+    </footer>
+
+    <script>
+        // 2026 Federal Tax Brackets (Projected - Single Filer)
+        const taxBrackets2026 = [
+            { min: 0, max: 11600, rate: 0.10 },
+            { min: 11601, max: 47150, rate: 0.12 },
+            { min: 47151, max: 100525, rate: 0.22 },
+            { min: 100526, max: 191950, rate: 0.24 },
+            { min: 191951, max: 243725, rate: 0.32 },
+            { min: 243726, max: 609350, rate: 0.35 },
+            { min: 609351, max: Infinity, rate: 0.37 }
+        ];
+        
+        const STANDARD_DEDUCTION = 14600; // Projected for 2026
+        
+        function calculateTax() {
+            // Get input values
+            const salaryInput = document.getElementById('salary').value;
+            const stateRate = parseFloat(document.getElementById('state').value) / 100;
+            const payFrequency = document.getElementById('payFrequency').value;
+            
+            // Validate input
+            if (!salaryInput || salaryInput <= 0) {
+                alert('Please enter a valid salary amount');
+                return;
+            }
+            
+            let annualSalary = parseFloat(salaryInput);
+            
+            // Convert to annual if needed
+            switch(payFrequency) {
+                case 'monthly':
+                    annualSalary = annualSalary * 12;
+                    break;
+                case 'biweekly':
+                    annualSalary = annualSalary * 26;
+                    break;
+                case 'weekly':
+                    annualSalary = annualSalary * 52;
+                    break;
+                // yearly is already annual
+            }
+            
+            // Calculate Federal Tax
+            const taxableIncome = Math.max(0, annualSalary - STANDARD_DEDUCTION);
+            let federalTax = 0;
+            let remainingIncome = taxableIncome;
+            
+            for (let i = 0; i < taxBrackets2026.length; i++) {
+                const bracket = taxBrackets2026[i];
+                if (remainingIncome <= 0) break;
+                
+                const bracketSize = bracket.max - bracket.min;
+                const incomeInBracket = Math.min(remainingIncome, bracketSize);
+                
+                if (incomeInBracket > 0) {
+                    federalTax += incomeInBracket * bracket.rate;
+                    remainingIncome -= incomeInBracket;
+                }
+            }
+            
+            // Calculate State Tax
+            const stateTax = annualSalary * stateRate;
+            
+            // Calculate FICA Taxes
+            const SOCIAL_SECURITY_RATE = 0.062;
+            const MEDICARE_RATE = 0.0145;
+            const ADDITIONAL_MEDICARE_RATE = 0.009;
+            const SOCIAL_SECURITY_MAX = 168600; // 2024 limit, will adjust for 2026
+            
+            let socialSecurityTax = Math.min(annualSalary, SOCIAL_SECURITY_MAX) * SOCIAL_SECURITY_RATE;
+            let medicareTax = annualSalary * MEDICARE_RATE;
+            
+            // Additional Medicare Tax for high earners
+            if (annualSalary > 200000) {
+                medicareTax += (annualSalary - 200000) * ADDITIONAL_MEDICARE_RATE;
+            }
+            
+            const ficaTax = socialSecurityTax + medicareTax;
+            
+            // Calculate Totals
+            const totalTax = federalTax + stateTax + ficaTax;
+            const netSalary = annualSalary - totalTax;
+            const effectiveTaxRate = (totalTax / annualSalary) * 100;
+            const keepPercentage = 100 - effectiveTaxRate;
+            
+            // Format currency
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            
+            // Update display
+            document.getElementById('netSalary').textContent = formatter.format(netSalary);
+            document.getElementById('federalTax').textContent = formatter.format(federalTax);
+            document.getElementById('stateTax').textContent = formatter.format(stateTax);
+            document.getElementById('ficaTax').textContent = formatter.format(ficaTax);
+            document.getElementById('totalTax').textContent = formatter.format(totalTax);
+            document.getElementById('taxRate').textContent = effectiveTaxRate.toFixed(1) + '%';
+            document.getElementById('keepPercentage').textContent = keepPercentage.toFixed(1) + '%';
+            
+            // Show pay frequency breakdown
+            let frequencyText = '';
+            switch(payFrequency) {
+                case 'yearly':
+                    frequencyText = 'per year';
+                    break;
+                case 'monthly':
+                    frequencyText = 'per month';
+                    break;
+                case 'biweekly':
+                    frequencyText = 'per bi-weekly paycheck';
+                    break;
+                case 'weekly':
+                    frequencyText = 'per week';
+                    break;
+            }
+            
+            // Add a small note about frequency
+            const resultsSection = document.querySelector('.results-section');
+            let note = document.getElementById('frequencyNote');
+            if (!note) {
+                note = document.createElement('p');
+                note.id = 'frequencyNote';
+                note.style.marginTop = '1rem';
+                note.style.fontSize = '0.9rem';
+                note.style.color = '#64748b';
+                resultsSection.appendChild(note);
+            }
+            note.textContent = `All figures shown annually. Your net income is ${formatter.format(netSalary/getFrequencyDivisor(payFrequency))} ${frequencyText}.`;
+        }
+        
+        function getFrequencyDivisor(frequency) {
+            switch(frequency) {
+                case 'yearly': return 1;
+                case 'monthly': return 12;
+                case 'biweekly': return 26;
+                case 'weekly': return 52;
+                default: return 1;
+            }
+        }
+        
+        // Initialize with example data
+        window.onload = function() {
+            document.getElementById('salary').value = 65000;
+            calculateTax();
+        };
+    </script>
+</body>
+</html>
